@@ -22,7 +22,9 @@
     "generate": "stencil generate"
   },
   "dependencies": {
-    "@stencil/core": "npm:@johnjenkins/stencil-community@^0.1.0"
+    "@stencil/core": "npm:@johnjenkins/stencil-community@^0.1.0",
+    "i18next": "^20.3.2",
+    "loc-i18next": "^0.1.4"
   },
   "license": "MIT"
 }

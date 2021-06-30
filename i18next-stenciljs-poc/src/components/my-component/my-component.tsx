@@ -1,15 +1,19 @@
-import { Component, Mixin, Prop, h } from '@stencil/core';
+import { Component, Mixin, Prop, h, ComponentInterface, Host } from '@stencil/core';
 import { format } from '../../utils/utils';
-import { ComponentLocalizable } from '../../decorators/qrvey-localization';
+import { I18nLocalizable } from '../i18n-localizable/i18n-localizable';
 
 
-@Mixin(ComponentLocalizable)
+@Mixin(I18nLocalizable)
 @Component({
   tag: 'my-component',
   styleUrl: 'my-component.css',
   shadow: true,
 })
-export class MyComponent {
+export class MyComponent implements ComponentInterface {
+
+  // componentWillLoad() {
+  //   console.log("from MyComponent");
+  // }
   /**
    * The first name
    */
@@ -30,8 +34,9 @@ export class MyComponent {
   }
 
   render() {
-    const localize = (this as any).localize;
-    return <div>Hello, World! I'm {this.getText()}. {`Other: ${JSON.stringify(localize)}`}</div>;
+    return <Host>
+      <div>Hello, World! I'm {this.getText()}. {`Other: ${(this as any).language}`}</div>
+      <i18n-localizable ></i18n-localizable>
+    </Host>
   }
 }
-export interface MyComponent extends ComponentLocalizable { }
