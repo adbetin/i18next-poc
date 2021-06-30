@@ -1,6 +1,9 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Mixin, Prop, h } from '@stencil/core';
 import { format } from '../../utils/utils';
+import { ComponentLocalizable } from '../../decorators/qrvey-localization';
 
+
+@Mixin(ComponentLocalizable)
 @Component({
   tag: 'my-component',
   styleUrl: 'my-component.css',
@@ -27,6 +30,8 @@ export class MyComponent {
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    const localize = (this as any).localize;
+    return <div>Hello, World! I'm {this.getText()}. {`Other: ${JSON.stringify(localize)}`}</div>;
   }
 }
+export interface MyComponent extends ComponentLocalizable { }
