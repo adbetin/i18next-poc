@@ -1,38 +1,46 @@
-export class ComponentLocalizable {
-  localize = LocalizableService.getInstance();
+import i18next from 'i18next';
+import Backend from 'i18next-http-backend';
 
-  constructor() {
-    console.log("This is the constructor");
+export class I18nServiceBuilder {
+  private constructor() { }
+
+  public static async buildI18n(language: string, component: string): Promise<I18nService> {
+    return await this._initI18n(language, component);
+  }
+
+  private static async _initI18n(language: string, component: string): Promise<I18nService> {
+    if (!i18next.isInitialized) {
+      await i18next
+        .use(Backend)
+        .init({
+          lng: language, debug: true, ns: [],
+          backend: {
+            loadPath: '/build/i18n/{{ns}}.{{lng}}.i18n.json'
+          }
+        })
+    }
+    if (language !== i18next.language) await i18next.changeLanguage(language);
+    await i18next.loadNamespaces(component);
+    return new I18nServiceConcrete(i18next, language, component);
   }
 }
 
-class LocalizableService {
-  private static instance: LocalizableService;
+export abstract class I18nService {
+  abstract translate(key: string): string;
+}
 
-  /**
-   * The Singleton's constructor should always be private to prevent direct
-   * construction calls with the `new` operator.
-   */
-  private constructor() { }
-
-  /**
-   * The static method that controls the access to the singleton instance.
-   *
-   * This implementation let you subclass the Singleton class while keeping
-   * just one instance of each subclass around.
-   */
-  public static getInstance(): LocalizableService {
-    if (!LocalizableService.instance) {
-      LocalizableService.instance = new LocalizableService();
-    }
-    return LocalizableService.instance;
+class I18nServiceConcrete extends I18nService {
+  _i18next: any;
+  _lang: string;
+  _component: string;
+  constructor(i18nInstance: any, language: string, component: string) {
+    super();
+    this._lang = language;
+    this._i18next = i18nInstance;
+    this._component = component;
   }
 
-  /**
-   * Finally, any singleton should define some business logic, which can be
-   * executed on its instance.
-   */
-  public someBusinessLogic() {
-    // ...
+  translate(key: string) {
+    return this._i18next.t(`${this._component}:${key}`);
   }
 }

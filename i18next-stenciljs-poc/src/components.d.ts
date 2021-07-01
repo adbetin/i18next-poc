@@ -7,26 +7,14 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface I18nLocalizable {
-        "config": any;
-        "langKey": string;
-        "language": string;
+        "i18nComponent": string;
+        "i18nKey": string;
+        "i18nLang": string;
     }
     interface MyComponent {
-        "config": any;
-        /**
-          * The first name
-         */
-        "first": string;
-        "langKey": string;
-        "language": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "i18nComponent": string;
+        "i18nKey": string;
+        "i18nLang": string;
     }
 }
 declare global {
@@ -49,26 +37,14 @@ declare global {
 }
 declare namespace LocalJSX {
     interface I18nLocalizable {
-        "config"?: any;
-        "langKey"?: string;
-        "language"?: string;
+        "i18nComponent"?: string;
+        "i18nKey"?: string;
+        "i18nLang"?: string;
     }
     interface MyComponent {
-        "config"?: any;
-        /**
-          * The first name
-         */
-        "first"?: string;
-        "langKey"?: string;
-        "language"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "i18nComponent"?: string;
+        "i18nKey"?: string;
+        "i18nLang"?: string;
     }
     interface IntrinsicElements {
         "i18n-localizable": I18nLocalizable;

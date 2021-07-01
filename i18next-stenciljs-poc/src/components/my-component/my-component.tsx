@@ -1,7 +1,5 @@
-import { Component, Mixin, Prop, h, ComponentInterface, Host } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Mixin, h, ComponentInterface, Host } from '@stencil/core';
 import { I18nLocalizable } from '../i18n-localizable/i18n-localizable';
-
 
 @Mixin(I18nLocalizable)
 @Component({
@@ -11,32 +9,15 @@ import { I18nLocalizable } from '../i18n-localizable/i18n-localizable';
 })
 export class MyComponent implements ComponentInterface {
 
-  // componentWillLoad() {
-  //   console.log("from MyComponent");
-  // }
-  /**
-   * The first name
-   */
-  @Prop() first: string;
-
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
-
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  async componentWillLoad() {
+    await this.initI18n();
   }
 
   render() {
     return <Host>
-      <div>Hello, World! I'm {this.getText()}. {`Other: ${(this as any).language}`}</div>
-      <i18n-localizable ></i18n-localizable>
+      <div>{this.translate('hello')}</div>
+      <i18n-localizable i18nLang={this.i18nLang} i18nKey="subtitle" i18nComponent="my-component"></i18n-localizable>
     </Host>
   }
 }
+export interface MyComponent extends I18nLocalizable { }
