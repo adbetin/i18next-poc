@@ -9,7 +9,22 @@
     <script nomodule src="/build/i18next-stenciljs-poc.js"></script>
   </head>
   <body>
-    <my-component i18n-lang='dev'></my-component>
-    <my-component i18n-lang='dev'></my-component>
+    <label for="translator">Select Language</label>
+    <select id="translator">
+      <option value="en" selected>English</option>
+      <option value="dev">Develop</option>
+      <option value="es">Espa&ntilde;ol</option>
+    </select>
+    <br/>
+    <br/>
+
+    <my-component i18n-lang='en'></my-component>
+    <script>
+      const translateComponents = document.querySelectorAll("[i18n-lang]");
+      const translator = document.querySelector("#translator");
+      translator.addEventListener("change", (ev) => {
+        translateComponents.forEach(component => component.setAttribute("i18n-lang", translator.value))
+      })
+    </script>
   </body>
 </html>
