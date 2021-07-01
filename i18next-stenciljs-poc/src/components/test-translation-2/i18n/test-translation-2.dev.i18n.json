@@ -1,3 +1,4 @@
 {
-  "helloTranslation": "Hello Dev from Test 2"
+  "helloTranslation": "Hello Dev from Test 2",
+  "nested": "Nested Dev"
 }

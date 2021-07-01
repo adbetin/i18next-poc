@@ -1,3 +1,4 @@
 {
-  "helloTranslation": "Hola mundo en español - Test Component 2"
+  "helloTranslation": "Hola mundo en español - Test Component 2",
+  "nested": "Componente anidado"
 }

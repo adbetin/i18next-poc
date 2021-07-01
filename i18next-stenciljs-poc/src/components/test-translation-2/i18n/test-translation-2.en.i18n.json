@@ -1,3 +1,4 @@
 {
-  "helloTranslation": "Hello World in english - Test Component 2"
+  "helloTranslation": "Hello World in english - Test Component 2",
+  "nested": "Nested Eng"
 }

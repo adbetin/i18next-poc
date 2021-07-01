@@ -12,6 +12,9 @@ export class TestTranslation2 {
     return (
       <Host>
         {this.translate('helloTranslation')}
+        <br />
+        {this.translate('nested')}
+        <my-component i18nLang={this.i18nLang}></my-component>
       </Host>
     );
   }
