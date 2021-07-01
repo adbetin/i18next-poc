@@ -16,6 +16,11 @@ export namespace Components {
         "i18nKey": string;
         "i18nLang": string;
     }
+    interface TestTranslation2 {
+        "i18nComponent": string;
+        "i18nKey": string;
+        "i18nLang": string;
+    }
 }
 declare global {
     interface HTMLI18nLocalizableElement extends Components.I18nLocalizable, HTMLStencilElement {
@@ -30,9 +35,16 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLTestTranslation2Element extends Components.TestTranslation2, HTMLStencilElement {
+    }
+    var HTMLTestTranslation2Element: {
+        prototype: HTMLTestTranslation2Element;
+        new (): HTMLTestTranslation2Element;
+    };
     interface HTMLElementTagNameMap {
         "i18n-localizable": HTMLI18nLocalizableElement;
         "my-component": HTMLMyComponentElement;
+        "test-translation-2": HTMLTestTranslation2Element;
     }
 }
 declare namespace LocalJSX {
@@ -46,9 +58,15 @@ declare namespace LocalJSX {
         "i18nKey"?: string;
         "i18nLang"?: string;
     }
+    interface TestTranslation2 {
+        "i18nComponent"?: string;
+        "i18nKey"?: string;
+        "i18nLang"?: string;
+    }
     interface IntrinsicElements {
         "i18n-localizable": I18nLocalizable;
         "my-component": MyComponent;
+        "test-translation-2": TestTranslation2;
     }
 }
 export { LocalJSX as JSX };
@@ -57,6 +75,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "i18n-localizable": LocalJSX.I18nLocalizable & JSXBase.HTMLAttributes<HTMLI18nLocalizableElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "test-translation-2": LocalJSX.TestTranslation2 & JSXBase.HTMLAttributes<HTMLTestTranslation2Element>;
         }
     }
 }
