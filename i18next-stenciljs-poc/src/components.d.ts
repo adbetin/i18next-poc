@@ -16,6 +16,9 @@ export namespace Components {
         "i18nKey": string;
         "i18nLang": string;
     }
+    interface TestNoMixing {
+        "i18nLang": string;
+    }
     interface TestTranslation2 {
         "i18nComponent": string;
         "i18nKey": string;
@@ -35,6 +38,12 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLTestNoMixingElement extends Components.TestNoMixing, HTMLStencilElement {
+    }
+    var HTMLTestNoMixingElement: {
+        prototype: HTMLTestNoMixingElement;
+        new (): HTMLTestNoMixingElement;
+    };
     interface HTMLTestTranslation2Element extends Components.TestTranslation2, HTMLStencilElement {
     }
     var HTMLTestTranslation2Element: {
@@ -44,6 +53,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "i18n-localizable": HTMLI18nLocalizableElement;
         "my-component": HTMLMyComponentElement;
+        "test-no-mixing": HTMLTestNoMixingElement;
         "test-translation-2": HTMLTestTranslation2Element;
     }
 }
@@ -58,6 +68,9 @@ declare namespace LocalJSX {
         "i18nKey"?: string;
         "i18nLang"?: string;
     }
+    interface TestNoMixing {
+        "i18nLang"?: string;
+    }
     interface TestTranslation2 {
         "i18nComponent"?: string;
         "i18nKey"?: string;
@@ -66,6 +79,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "i18n-localizable": I18nLocalizable;
         "my-component": MyComponent;
+        "test-no-mixing": TestNoMixing;
         "test-translation-2": TestTranslation2;
     }
 }
@@ -75,6 +89,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "i18n-localizable": LocalJSX.I18nLocalizable & JSXBase.HTMLAttributes<HTMLI18nLocalizableElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "test-no-mixing": LocalJSX.TestNoMixing & JSXBase.HTMLAttributes<HTMLTestNoMixingElement>;
             "test-translation-2": LocalJSX.TestTranslation2 & JSXBase.HTMLAttributes<HTMLTestTranslation2Element>;
         }
     }

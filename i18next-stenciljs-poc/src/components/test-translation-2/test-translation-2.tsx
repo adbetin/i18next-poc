@@ -15,6 +15,7 @@ export class TestTranslation2 {
         <br />
         {this.translate('nested')}
         <my-component i18nLang={this.i18nLang}></my-component>
+        <test-no-mixing i18nLang={this.i18nLang}></test-no-mixing>
       </Host>
     );
   }
